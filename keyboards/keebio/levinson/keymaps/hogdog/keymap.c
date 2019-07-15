@@ -20,9 +20,9 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* QWERTY - tap
   * ,-----------------------------------------.    ,-----------------------------------------.
-  * | Esc  |  Q   |  W   |  E   |  R   |  T   |    |  Y   |  U   |  I   |  O   |  P   |  \   |
+  * |   `  |  Q   |  W   |  E   |  R   |  T   |    |  Y   |  U   |  I   |  O   |  P   |  \   |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * |  `   |  A   |  S   |  D   |  F   |  G   |    |  H   |  J   |  K   |  L   |  ;   |  '   |
+  * | Esc  |  A   |  S   |  D   |  F   |  G   |    |  H   |  J   |  K   |  L   |  ;   |  '   |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * |  -   |  Z   |  X   |  C   |  V   |  B   |    |  N   |  M   |  ,   |  .   |  /   |  =   |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
@@ -41,8 +41,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_QWERTY] = LAYOUT_ortho_4x12(
-    KC_ESC,  KC_Q, KC_W, KC_E, KC_R, KC_T,                                      KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLASH,
-    LSFT_T(KC_GRAVE), KC_A, KC_S, KC_D, KC_F, KC_G,                             KC_H, KC_J, KC_K, KC_L, KC_SCLN, RSFT_T(KC_QUOTE),
+    LSFT_T(KC_GRAVE),  KC_Q, KC_W, KC_E, KC_R, KC_T,                                      KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLASH,
+    KC_ESC, KC_A, KC_S, KC_D, KC_F, KC_G,                             KC_H, KC_J, KC_K, KC_L, KC_SCLN, RSFT_T(KC_QUOTE),
     LCTL_T(KC_MINUS), LGUI_T(KC_Z), LALT_T(KC_X), KC_C, KC_V, KC_B,             KC_N, KC_M, KC_COMMA, RALT_T(KC_DOT), RGUI_T(KC_SLSH), RCTL_T(KC_EQUAL),
     KC_LCTL, KC_LGUI, KC_LALT, KC_LALT, LT(_NAVALT, KC_TAB), LSFT_T(KC_SPACE),  LCTL_T(KC_ENTER), LT(_SYM, KC_BSPC), KC_RALT, KC_RALT, KC_RGUI, KC_RCTL
   ),
@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* NAVALT (left thumb) - tap
   * ,-----------------------------------------.    ,-----------------------------------------.
-  * | Esc  |  Tab |  M2  | M up |  M1  | ScUp |    | Home | PgUp | PgDn |  End | Bksp | Del  |
+  * | Esc  | menu |  M2  | M up |  M1  | ScUp |    | Home | PgDn | PgUp |  End | Bksp | Del  |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | Shift| VolU |  M l | M d  |  mRt | ScDn |    | Left | Down |  Up  | Right| PtSc | Insrt|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_NAVALT] = LAYOUT_ortho_4x12(/*  */
-    KC_ESC, KC_TAB, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                           KC_HOME, KC_PGUP, KC_PGDN, KC_END, KC_BSPC, KC_DEL,
+    KC_ESC, KC_APP, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_BSPC, KC_DEL,
     KC_LSFT, KC_VOLU, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                         KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PSCREEN, RSFT_T(KC_INS),
     LCTL_T(KC_MUTE), LGUI_T(KC_VOLD), KC_TRNS, S(KC_LALT), S(KC_LCTRL), KC_TRNS,  KC_ACL0, KC_ACL1, KC_ACL2, S(KC_RALT), S(KC_RGUI), S(KC_RCTL),
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LSFT_T(KC_DEL),                  LCTL_T(KC_BSPC), LT(_ADJUST, KC_DEL), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS

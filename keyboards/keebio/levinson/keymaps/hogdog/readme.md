@@ -18,9 +18,13 @@
     * maybe put brackets here instead? or other symbols?
 * [ ] use super alt tab code, but with alt tab and alt ` (https://docs.qmk.fm/#/feature_macros?id=super-alt↯tab)
   * the adjust layer + hold is annoying b/c if i hit alt before the second layer, it won't register as alt
-* [ ] figure out how to remove those two dumb keys  (what is this talking about)
+* [ ] figure out how to remove those two dumb keys  (what is this talking about? dactyl?)
 * [ ] add brightness somewhere 
 * [ ] add sleep somewhere
+* [ ] add arrow function button? (maybe better as just a snippet) [ref](https://docs.qmk.fm/#/feature_macros?id=super-alt%e2%86%aftab)
+* [X] add menu option somewhere (is it like right clicking on focused element?)
+* [X] swap pgup and down (to match hjkl)
+
 # Notes
 * maybe it would be better to put control on the right?
   * then I could use shift on the number / symbol layer more easily
