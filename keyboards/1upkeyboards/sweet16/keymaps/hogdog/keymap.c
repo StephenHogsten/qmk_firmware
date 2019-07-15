@@ -11,7 +11,7 @@ enum custom_layers {
   MOUSE,
   NAV,
   MACRO,
-  MACRO2,
+  LEFT,
   PWD,
   LAYER
 };
@@ -25,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |-----|-----|-----|-----|
   * |shift|  c  |  y  |  f  |
   * |-----|-----|-----|-----|
-  * | esc |  h  | ctrl|space|
+  * | esc |  h  |  n  |space|
   * |-----|-----|-----|-----|
   * (hold esc for layers)
   */
@@ -33,13 +33,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB, KC_Q, KC_W, KC_E,
     KC_LCTRL, KC_A, KC_S, KC_D,
     KC_LSHIFT, KC_C, KC_Y, KC_F,
-    LT(LAYER, KC_ESC), KC_H, KC_LCTRL, KC_SPACE
+    LT(LAYER, KC_ESC), KC_H, KC_N, KC_SPACE
   ),
 
   /* numpad
   * |-----|-----|-----|-----|
   * |  7  |  8  |  9  |  *  |
-  * |-----|-----|-----|-----|
+  * |-----|-----|-----|-----
   * |  4  |  5  |  6  |  /  |
   * |-----|-----|-----|-----|
   * |  1  |  2  |  3  |  -  |
@@ -74,27 +74,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   /* fake mouse
   * |-----|-----|-----|-----|
-  * | tab |  q  |  w  |  e  |
+  * | btn2|  up | btn1| s up|
   * |-----|-----|-----|-----|
-  * |ctrl |  a  |  s  |  d  |
+  * | left| down|right| s dn|
   * |-----|-----|-----|-----|
-  * |shift|  c  |  y  |  f  |
+  * | btn3| btn4| s lt| s rt|
   * |-----|-----|-----|-----|
-  * | esc |  h  | ctrl|space|
+  * | esc |acc 0|acc 1|acc 2|
   * |-----|-----|-----|-----|
   */
   [MOUSE] = LAYOUT_ortho_4x4(
-    KC_7, KC_8, KC_9, KC_TRNS,
-    KC_4, KC_5, KC_6, KC_MINUS,
-    KC_1, KC_2, KC_3, KC_EQUAL,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    KC_MS_BTN2, KC_MS_U, KC_MS_BTN1, KC_MS_WH_UP,
+    KC_MS_L, KC_MS_D, KC_MS_R, KC_MS_WH_DOWN,
+    KC_MS_BTN3, KC_MS_BTN4, KC_MS_WH_LEFT, KC_MS_WH_RIGHT,
+    KC_TRNS, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2
   ),
   
   /* navigation
   * |-----|-----|-----|-----|
-  * | tab |  q  |  w  |  e  |
+  * |  `  |  q  |  w  |  e  |
   * |-----|-----|-----|-----|
-  * |ctrl |  a  |  s  |  d  |
+  * | tab |  a  |  s  |  d  |
   * |-----|-----|-----|-----|
   * |shift|  c  |  y  |  f  |
   * |-----|-----|-----|-----|
@@ -102,46 +102,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |-----|-----|-----|-----|
   */
   [NAV] = LAYOUT_ortho_4x4(
-    KC_NO, KC_HOME, KC_NO, KC_VOLU,
-    KC_NO, KC_PGUP, KC_NO, KC_VOLD,
-    KC_NO, KC_PGDOWN, KC_NO, KC_MUTE,
-    KC_TRNS, KC_END, KC_NO, KC_MEDIA_PLAY_PAUSE
+    KC_GRAVE, KC_HOME, KC_NO, KC_VOLU,
+    KC_TAB, KC_PGUP, KC_NO, KC_VOLD,
+    KC_LSHIFT, KC_PGDOWN, KC_NO, KC_MUTE,
+    KC_TRNS, KC_END, KC_NO, KC_LALT
   ),
   
   /* macros
   * |-----|-----|-----|-----|
-  * | tab |  q  |  w  |  e  |
+  * |  -  |  -  |  -  |  -  |
   * |-----|-----|-----|-----|
-  * |ctrl |  a  |  s  |  d  |
+  * |  -  |  -  |  -  |  -  |
   * |-----|-----|-----|-----|
-  * |shift|  c  |  y  |  f  |
+  * |  -  |  -  |  -  |  -  |
   * |-----|-----|-----|-----|
-  * | esc |  h  | ctrl|space|
+  * | esc |sleep|  -  |  -  |
   * |-----|-----|-----|-----|
   */
   [MACRO] = LAYOUT_ortho_4x4(
-    KC_MS_BTN2, KC_MS_U, KC_MS_BTN1, KC_MS_WH_UP,
-    KC_MS_L, KC_MS_D, KC_MS_R, KC_MS_WH_DOWN,
-    KC_MS_BTN3, KC_MS_BTN4, KC_MS_WH_LEFT, KC_MS_WH_RIGHT,
-    KC_TRNS, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2
+    KC_NO, KC_NO, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO,
+    KC_TRNS, KC_SYSTEM_SLEEP, KC_NO, KC_NO
   ),
   
-  /* macros 2
+  /* left / baba
   * |-----|-----|-----|-----|
   * | tab |  q  |  w  |  e  |
   * |-----|-----|-----|-----|
-  * |ctrl |  a  |  s  |  d  |
+  * | caps|  a  |  s  |  d  |
   * |-----|-----|-----|-----|
-  * |shift|  c  |  y  |  f  |
+  * |shift|  z  |  x  |  c  |
   * |-----|-----|-----|-----|
-  * | esc |  h  | ctrl|space|
+  * | esc |  r  |enter|space|
   * |-----|-----|-----|-----|
   */
-  [MACRO2] = LAYOUT_ortho_4x4(
-    KC_NO, KC_NO, KC_UP, KC_NO,
-    KC_NO, KC_LEFT, KC_DOWN, KC_RIGHT,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_TRNS, KC_NO, KC_NO, KC_SPACE
+  [LEFT] = LAYOUT_ortho_4x4(
+    KC_TAB, KC_Q, KC_W, KC_E,
+    KC_CAPS, KC_A, KC_S, KC_D,
+    KC_LSHIFT, KC_Z, KC_X, KC_C,
+    KC_TRNS, KC_R, KC_ENTER, KC_SPACE
   ),
   
   /* password
@@ -166,18 +166,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |-----|-----|-----|-----|
   * | ow  | num | rgb |mouse|
   * |-----|-----|-----|-----|
-  * | nav |macro| mac2| pwd |
+  * | nav |macro| left| pwd |
   * |-----|-----|-----|-----|
   * |shift|  c  |  y  |  f  |
   * |-----|-----|-----|-----|
-  * | esc |  h  |a-tab|rgbOn|
+  * | esc |sleep|a-tab|rgbOn|
   * |-----|-----|-----|-----|
   */
   [LAYER] = LAYOUT_ortho_4x4(
     RESET_LAYERS, TG(NUMPAD), TG(RGB), TG(MOUSE),
-    TG(NAV), TG(MACRO), TG(MACRO2), TG(PWD),
+    TG(NAV), TG(MACRO), TG(LEFT), TG(PWD),
     KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_TRNS, KC_NO, A(KC_TAB), RGB_TOG
+    KC_TRNS, KC_SYSTEM_SLEEP, A(KC_TAB), RGB_TOG
   )
 };
 
