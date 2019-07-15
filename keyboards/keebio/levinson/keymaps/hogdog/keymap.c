@@ -1,10 +1,17 @@
 #include QMK_KEYBOARD_H
 
+bool is_alt_tab_active = false;
+uint16_t alt_tab_timer = 0;
+
 extern keymap_config_t keymap_config;
 
 enum custom_keycodes {
   M_LSAHL = SAFE_RANGE,
-  M_RAILSC 
+  M_RAILSC,
+  M_ALT_TAB,
+  M_S_ALT_TAB,
+  M_ALT_GRAVE,
+  M_S_ALT_GRAVE
 };
 
 #define _QWERTY 0
@@ -96,19 +103,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* NAVALT (left thumb) - tap
   * ,-----------------------------------------.    ,-----------------------------------------.
-  * | Esc  | menu |  M2  | M up |  M1  | ScUp |    | Home | PgDn | PgUp |  End | Bksp | Del  |
+  * | Esc  | menu |  M2  | M up |  M1  | ScUp |    | Home | PgDn | PgUp |  End | BrUp | PtSc |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | Shift| VolU |  M l | M d  |  mRt | ScDn |    | Left | Down |  Up  | Right| PtSc | Insrt|
+  * | Shift| VolU |  M l | M d  |  mRt | ScDn |    | Left | Down |  Up  | Right| BrDn | Insrt|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | Mute | VolD |      | s alt| s ctl|      |    | acc0 | acc1 | acc2 | s alt| s gui| s ctl|
+  * | Mute | VolD |      | s alt| s ctl|      |    |saltab|alttab| alt` |salt` | acc0 | acc2 |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * |      |      |      |      |(this)|  Del |    | BkSp | _ADJ |      |      |      |      |
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_NAVALT] = LAYOUT_ortho_4x12(/*  */
-    KC_ESC, KC_APP, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_BSPC, KC_DEL,
-    KC_LSFT, KC_VOLU, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                         KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PSCREEN, RSFT_T(KC_INS),
-    LCTL_T(KC_MUTE), LGUI_T(KC_VOLD), KC_TRNS, S(KC_LALT), S(KC_LCTRL), KC_TRNS,  KC_ACL0, KC_ACL1, KC_ACL2, S(KC_RALT), S(KC_RGUI), S(KC_RCTL),
+    KC_ESC, KC_APP, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_BRIGHTNESS_UP, KC_PSCREEN,
+    KC_LSFT, KC_VOLU, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                         KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_BRIGHTNESS_DOWN, KC_INS,
+    LCTL_T(KC_MUTE), LGUI_T(KC_VOLD), KC_TRNS, S(KC_LALT), S(KC_LCTRL), KC_TRNS,  M_S_ALT_TAB, M_ALT_TAB, M_ALT_GRAVE, M_S_ALT_GRAVE, KC_ACL0, KC_ACL2,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LSFT_T(KC_DEL),                  LCTL_T(KC_BSPC), LT(_ADJUST, KC_DEL), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
@@ -134,17 +141,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,-----------------------------------------.    ,-----------------------------------------.
   * | trans| QWERT|QWERT2|DVORAK|COLEMA|OVERWA|    | trans| trans| trans| trans| trans| trans|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | caps |  !   |  @   |  #   | alt  |  %   |    |  ^   |  tab |  *   |  (   |   )  |   |  |
+  * | trans| trans| trans| trans|c a E | trans|    | trans| trans| trans|ls ahl| trans| trans|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | trans| trans| trans|railsc|c a E | trans|    | trans|ls ahl| trans| trans| trans| trans|
+  * | trans| trans| trans|railsc| trans| trans|    | trans| trans| trans| trans| trans| trans|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | trans| trans| trans| trans| trans| trans|    | trans| trans| trans| trans| trans| trans|
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_ADJUST] = LAYOUT_ortho_4x12(
     KC_TRNS, DF(_QWERTY), DF(_QWERTY_ALT), DF(_DVORAK), DF(_COLEMAK), DF(_OW),  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_CAPS, S(KC_1), S(KC_2), S(KC_3), KC_LALT, S(KC_5),                       S(KC_TAB), KC_TAB, KC_GRAVE, S(KC_GRAVE), S(KC_0), S(KC_BSLASH),
-    KC_TRNS, KC_TRNS, KC_TRNS, M_RAILSC, MEH(KC_E), KC_TRNS,                    KC_TRNS, M_LSAHL, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MEH(KC_E), KC_TRNS,                    KC_TRNS, KC_TRNS, KC_TRNS, M_LSAHL, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, M_RAILSC, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )
 };
@@ -161,6 +168,77 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("rails c" SS_TAP(X_ENTER));
       }
       break;
+    case M_ALT_TAB:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        } 
+        alt_tab_timer = timer_read();
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+      }
+      break;
+    case M_S_ALT_TAB:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        } 
+        alt_tab_timer = timer_read();
+        register_code(KC_LSHIFT);
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+        unregister_code(KC_LSHIFT);
+      }
+      break;
+    case M_ALT_GRAVE:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        } 
+        alt_tab_timer = timer_read();
+        register_code(KC_GRAVE);
+      } else {
+        unregister_code(KC_GRAVE);
+      }
+      break;
+    case M_S_ALT_GRAVE:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        } 
+        alt_tab_timer = timer_read();
+        register_code(KC_LSHIFT);
+        register_code(KC_GRAVE);
+      } else {
+        unregister_code(KC_GRAVE);
+        unregister_code(KC_LSHIFT);
+      }
+      break;
   }
   return true;
+}
+
+void matrix_scan_user(void) {     // The very important timer. 
+  if (is_alt_tab_active) {
+    if (timer_elapsed(alt_tab_timer) > 2500) {
+      unregister_code(KC_LALT);
+      is_alt_tab_active = false;
+    }
+  }
+}
+
+uint32_t layer_state_set_user(uint32_t state) {
+  switch (biton32(state)) {
+    case _QWERTY:
+      unregister_code(KC_LALT);
+      is_alt_tab_active = false;
+      break;
+  }
+  return state;
 }

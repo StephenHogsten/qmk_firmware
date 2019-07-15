@@ -5,7 +5,7 @@
 * [ ] add / install underglow
 * [ ] add button for clipit shortcut?
 * [X] decide on whether to have two shift keys or a shift and a control (I think control is probably better on the left)
-* [ ] should the layer keys be tap layers?
+* [X] should the layer keys be tap layers?
   * maybe make the four taps: del - space -- enter - backspace?
     * maybe tab instead of del? - yes, this is a good idea
       * then make tap layers for _SYM and _ALT (maybe del on right, not sure for right)
@@ -16,14 +16,15 @@
   * could alt tab be moved to the nav layer? - right now it seems like too many buttons
   * now that this is true, we could definitely make _ADJUST something else for home row
     * maybe put brackets here instead? or other symbols?
-* [ ] use super alt tab code, but with alt tab and alt ` (https://docs.qmk.fm/#/feature_macros?id=super-alt↯tab)
+* [X] use super alt tab code, but with alt tab and alt ` (https://docs.qmk.fm/#/feature_macros?id=super-alt↯tab)
   * the adjust layer + hold is annoying b/c if i hit alt before the second layer, it won't register as alt
 * [ ] figure out how to remove those two dumb keys  (what is this talking about? dactyl?)
-* [ ] add brightness somewhere 
-* [ ] add sleep somewhere
-* [ ] add arrow function button? (maybe better as just a snippet) [ref](https://docs.qmk.fm/#/feature_macros?id=super-alt%e2%86%aftab)
+* [X] add brightness somewhere 
+* [X] ~~add arrow function button? (maybe better as just a snippet - made one "anon")~~
+* [X] super alt tab [ref](https://docs.qmk.fm/#/feature_macros?id=super-alt%e2%86%aftab)
 * [X] add menu option somewhere (is it like right clicking on focused element?)
 * [X] swap pgup and down (to match hjkl)
+* [ ] it would be great it nav right thumb (enter) could be ctrl + enter, but it seems tough b/c of the caveat.  may be a hack available with leader key or something or custom code
 
 # Notes
 * maybe it would be better to put control on the right?
