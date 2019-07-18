@@ -105,17 +105,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,-----------------------------------------.    ,-----------------------------------------.
   * | Esc  | menu |  M2  | M up |  M1  | ScUp |    | Home | PgDn | PgUp |  End | BrUp | PtSc |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | Shift| VolU |  M l | M d  |  mRt | ScDn |    | Left | Down |  Up  | Right| BrDn | Insrt|
+  * | Mute | VolU |  M l | M d  |  mRt | ScDn |    | Left | Down |  Up  | Right| BrDn | Insrt|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | Mute | VolD |      | s alt| s ctl|      |    |saltab|alttab| alt` |salt` | acc0 | acc2 |
+  * |      | VolD |      | s alt| s ctl|      |    | alt` |alttab|saltab|salt` | acc2 | acc0 |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * |      |      |      |      |(this)|  Del |    | BkSp | _ADJ |      |      |      |      |
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_NAVALT] = LAYOUT_ortho_4x12(/*  */
-    KC_ESC, KC_APP, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_BRIGHTNESS_UP, KC_PSCREEN,
-    KC_LSFT, KC_VOLU, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                         KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_BRIGHTNESS_DOWN, KC_INS,
-    LCTL_T(KC_MUTE), LGUI_T(KC_VOLD), KC_TRNS, S(KC_LALT), S(KC_LCTRL), KC_TRNS,  M_S_ALT_TAB, M_ALT_TAB, M_ALT_GRAVE, M_S_ALT_GRAVE, KC_ACL0, KC_ACL2,
+    KC_TRNS, KC_APP, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                          KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_BRIGHTNESS_UP, KC_PSCREEN,
+    KC_MUTE, KC_VOLU, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                         KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_BRIGHTNESS_DOWN, KC_INS,
+    KC_TRNS, LGUI_T(KC_VOLD), KC_TRNS, S(KC_LALT), S(KC_LCTRL), KC_TRNS,          M_ALT_GRAVE, M_ALT_TAB, M_S_ALT_TAB, M_S_ALT_GRAVE, KC_ACL2, KC_ACL0,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LSFT_T(KC_DEL),                  LCTL_T(KC_BSPC), LT(_ADJUST, KC_DEL), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
