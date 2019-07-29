@@ -1,7 +1,11 @@
 #include QMK_KEYBOARD_H
 
 enum custom_keycodes {
-  RESET_LAYERS = SAFE_RANGE
+  RESET_LAYERS = SAFE_RANGE,
+  M_WIN_D,
+  M_GG,
+  M_LOL,
+  M_OOPS
 };
 
 enum custom_layers {
@@ -23,17 +27,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |-----|-----|-----|-----|
   * |ctrl |  a  |  s  |  d  |
   * |-----|-----|-----|-----|
-  * |shift|  c  |  y  |  f  |
+  * |shift|  c  |  n  |  f  |
   * |-----|-----|-----|-----|
-  * | esc |  h  |  n  |space|
+  * | esc |  h  |  `  |space|
   * |-----|-----|-----|-----|
   * (hold esc for layers)
   */
   [OVERWATCH] = LAYOUT_ortho_4x4(
     KC_TAB, KC_Q, KC_W, KC_E,
     KC_LCTRL, KC_A, KC_S, KC_D,
-    KC_LSHIFT, KC_C, KC_Y, KC_F,
-    LT(LAYER, KC_ESC), KC_H, KC_N, KC_SPACE
+    KC_LSHIFT, KC_C, KC_N, KC_F,
+    LT(LAYER, KC_ESC), KC_H, KC_GRAVE, KC_SPACE
   ),
 
   /* numpad
@@ -48,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |-----|-----|-----|-----|
   */
   [NUMPAD] = LAYOUT_ortho_4x4(
-    KC_KP_7, KC_KP_8, KC_KP_9, KC_ASTR  ,
+    KC_KP_7, KC_KP_8, KC_KP_9, KC_ASTR,
     KC_KP_4, KC_KP_5, KC_KP_6, KC_SLSH,
     KC_KP_1, KC_KP_2, KC_KP_3, KC_MINS,
     KC_TRNS, KC_ENT, KC_DOT, KC_EQL
@@ -58,17 +62,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |------|------|------|------|
   * |toggle| hue+ | sat+ | val+ |
   * |------|------|------|------|
-  * | ctrl | hue- | sat- | val- |
+  * |      | hue- | sat- | val- |
   * |------|------|------|------|
-  * |lucio |      | mode-| mode+|
+  * |*lucio |      | mode-| mode+|
   * |------|------|------|------|
   * | esc  | grad |snake |swirl |
   * |------|------|------|------|
   */
   [RGB] = LAYOUT_ortho_4x4(
     RGB_TOG,  RGB_HUI, RGB_SAI, RGB_VAI,
-    KC_H,     RGB_HUD, RGB_SAD, RGB_VAD,
-    KC_B, KC_N, RGB_RMOD, RGB_MOD,
+    KC_TRNS,     RGB_HUD, RGB_SAD, RGB_VAD,
+    KC_TRNS, KC_TRNS, RGB_RMOD, RGB_MOD,
     KC_TRNS, RGB_MODE_GRADIENT, RGB_MODE_BREATHE, RGB_MODE_SWIRL
   ),
   
@@ -92,25 +96,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   /* navigation
   * |-----|-----|-----|-----|
-  * |  `  |  q  |  w  |  e  |
+  * |PgUp |home | up  | end |
   * |-----|-----|-----|-----|
-  * | tab |  a  |  s  |  d  |
+  * |PgDn |left |down |right|
   * |-----|-----|-----|-----|
-  * |shift|  c  |  y  |  f  |
+  * |     |mute |vol- |vol+ |
   * |-----|-----|-----|-----|
-  * | esc |  h  | ctrl|space|
+  * | esc |winD |     |     |
   * |-----|-----|-----|-----|
   */
   [NAV] = LAYOUT_ortho_4x4(
-    KC_GRAVE, KC_HOME, KC_NO, KC_VOLU,
-    KC_TAB, KC_PGUP, KC_NO, KC_VOLD,
-    KC_LSHIFT, KC_PGDOWN, KC_NO, KC_MUTE,
-    KC_TRNS, KC_END, KC_NO, KC_LALT
+    KC_PGUP, KC_HOME, KC_UP, KC_END,
+    KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT,
+    KC_TRNS, KC_MUTE, KC_VOLU, KC_VOLD,
+    KC_TRNS, KC_END, KC_TRNS, KC_TRNS
   ),
   
   /* macros
   * |-----|-----|-----|-----|
-  * |  -  |  -  |  -  |  -  |
+  * |  gg | lol |oops |  -  |
   * |-----|-----|-----|-----|
   * |  -  |  -  |  -  |  -  |
   * |-----|-----|-----|-----|
@@ -120,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |-----|-----|-----|-----|
   */
   [MACRO] = LAYOUT_ortho_4x4(
-    KC_NO, KC_NO, KC_NO, KC_NO,
+    M_GG, M_LOL, M_OOPS, KC_NO,
     KC_NO, KC_NO, KC_NO, KC_NO,
     KC_NO, KC_NO, KC_NO, KC_NO,
     KC_TRNS, KC_SYSTEM_SLEEP, KC_NO, KC_NO
@@ -168,7 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |-----|-----|-----|-----|
   * | nav |macro| left| pwd |
   * |-----|-----|-----|-----|
-  * |shift|  c  |  y  |  f  |
+  * |shift|  c  |  y  | winD|
   * |-----|-----|-----|-----|
   * | esc |sleep|a-tab|rgbOn|
   * |-----|-----|-----|-----|
@@ -192,6 +196,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RESET_LAYERS:
       if (record->event.pressed) {
         layer_state_set(1);
+      }
+      break;
+    case M_WIN_D:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI("D"));
+      }
+      break;
+    case M_GG:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_ENTER) "gg" SS_TAP(X_ENTER));
+      }
+      break;
+    case M_LOL:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_ENTER) "lol" SS_TAP(X_ENTER));
+      }
+      break;
+    case M_OOPS:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_ENTER) "oops" SS_TAP(X_ENTER));
       }
       break;
     case KC_LSHIFT:
