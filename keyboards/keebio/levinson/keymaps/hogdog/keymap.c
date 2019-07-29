@@ -125,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | trans|  1   |  2   |  3   |  4   |  5   |    |  6   |  7   |  8   |  9   |   0  |   \  |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | trans| trans|      |  {   |  (   |   [  |    |  ]   |  )   |  }   |      | trans| trans|
+  * | trans| trans|      |  {   |  (   |   [  |    |  ]   |  )   |  }   |      |      |      |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | trans| trans| trans|      | Esc  |  Del |    | Bk`Sp |(this)| trans| trans| trans| trans|
   * `-----------------------------------------'    `-----------------------------------------'
@@ -134,14 +134,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F12, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                                  KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
     KC_TRNS, KC_1, KC_2, KC_3, KC_4, KC_5,                                      KC_6, KC_7, KC_8, KC_9, KC_0, RSFT_T(KC_BSLASH),
     KC_TRNS, KC_TRNS, KC_TRNS, S(KC_LBRC), S(KC_9), KC_LBRC,                    KC_RBRC, S(KC_0), S(KC_RBRC), KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LT(_ADJUST, KC_ESC), LSFT_T(KC_DEL),  LCTL_T(KC_BSPC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LT(_ADJUST, KC_ESC), LSFT_T(KC_DEL),    LCTL_T(KC_BSPC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
   /* ADJUST (both thumbs) - tap
   * ,-----------------------------------------.    ,-----------------------------------------.
-  * | trans| QWERT|QWERT2|DVORAK|COLEMA|OVERWA|    | trans| trans| trans| trans| trans| trans|
+  * | NAV  | QWERT|QWERT2|DVORAK|COLEMA|OVERWA|    | trans| trans| trans| trans| trans| SYM  |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | trans| trans| trans| trans|c a E | trans|    | trans| trans| trans|ls ahl| trans| trans|
+  * | caps | trans| trans| trans|c a E | trans|    | trans| trans| trans|ls ahl| trans| trans|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | trans| trans| trans|railsc| trans| trans|    | trans| trans| trans| trans| trans| trans|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
@@ -149,10 +149,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_ADJUST] = LAYOUT_ortho_4x12(
-    KC_TRNS, DF(_QWERTY), DF(_QWERTY_ALT), DF(_DVORAK), DF(_COLEMAK), DF(_OW),  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MEH(KC_E), KC_TRNS,                    KC_TRNS, KC_TRNS, KC_TRNS, M_LSAHL, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, M_RAILSC, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    TO(_NAVALT), DF(_QWERTY), DF(_QWERTY_ALT), DF(_DVORAK), DF(_COLEMAK), DF(_OW),   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_SYM),
+    KC_CAPS, KC_TRNS, KC_TRNS, KC_TRNS, MEH(KC_E), KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, M_LSAHL, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, M_RAILSC, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )
 };
 

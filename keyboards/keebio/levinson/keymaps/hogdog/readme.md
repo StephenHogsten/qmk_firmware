@@ -25,6 +25,9 @@
 * [X] add menu option somewhere (is it like right clicking on focused element?)
 * [X] swap pgup and down (to match hjkl)
 * [ ] it would be great it nav right thumb (enter) could be ctrl + enter, but it seems tough b/c of the caveat.  may be a hack available with leader key or something or custom code
+* [X] add locking layers to adj layer (esp. for locking arrow keys)
+* [X] caps lock
+
 
 # Notes
 * maybe it would be better to put control on the right?
