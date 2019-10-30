@@ -32,6 +32,11 @@
 * [ ] gaming / overwatch layout 
 * [ ] flash both sides? It'd be nice to plug into whichever half is more convenient
 * [ ] make the mouse movements easier to use somehow?
+* [ ] add 'reload!' button
+* [ ] I'm not sure I love the way I have to do underscores
+* [ ] I'm not sure I quite love the parens either?
+* [ ] It may be worth not putting space and shift on the same thing?  It's annoying when doing a space then starting with a captial word.  there may also be tweaks that would make this better
+* [ ] add ADJ shortcut for rebuild
 
 # Notes
 * maybe it would be better to put control on the right?

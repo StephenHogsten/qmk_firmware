@@ -11,7 +11,9 @@ enum custom_keycodes {
   M_ALT_TAB,
   M_S_ALT_TAB,
   M_ALT_GRAVE,
-  M_S_ALT_GRAVE
+  M_S_ALT_GRAVE,
+  M_RELOAD,
+  M_REBUILD
 };
 
 #define _QWERTY 0
@@ -33,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * |  -   |  Z   |  X   |  C   |  V   |  B   |    |  N   |  M   |  ,   |  .   |  /   |  =   |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | Ctrl | Gui  |  Alt |  Alt | Tab  | Space|    | Enter| BkSp | Alt  | Alt  | Gui  | Ctrl |
+  * | Ctrl | Gui  |  Alt |  Alt | Tab  | Space|    | Enter| BkSp |  Alt | Alt  | Gui  | Ctrl |
   * `-----------------------------------------'    `-----------------------------------------'
   */
   /* QWERTY - hold
@@ -44,14 +46,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | Ctrl | Gui  |  Alt |      |      |      |    |      |      |      | Alt  | Gui  | Ctrl |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * |      |      |      |      | _NAV | shift|    | ctrl | _SYM |      |      |      |      |
+  * |      |      |      |      | _NAV | shft |    | ctrl | _SYM |      |      |      |      |
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_QWERTY] = LAYOUT_ortho_4x12(
-    LSFT_T(KC_GRAVE),  KC_Q, KC_W, KC_E, KC_R, KC_T,                                      KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLASH,
-    KC_ESC, KC_A, KC_S, KC_D, KC_F, KC_G,                             KC_H, KC_J, KC_K, KC_L, KC_SCLN, RSFT_T(KC_QUOTE),
-    LCTL_T(KC_MINUS), LGUI_T(KC_Z), LALT_T(KC_X), KC_C, KC_V, KC_B,             KC_N, KC_M, KC_COMMA, RALT_T(KC_DOT), RGUI_T(KC_SLSH), RCTL_T(KC_EQUAL),
-    KC_LCTL, KC_LGUI, KC_LALT, KC_LALT, LT(_NAVALT, KC_TAB), LSFT_T(KC_SPACE),  LCTL_T(KC_ENTER), LT(_SYM, KC_BSPC), KC_RALT, KC_RALT, KC_RGUI, KC_RCTL
+    LSFT_T(KC_GRAVE),  KC_Q, KC_W, KC_E, KC_R, KC_T,                                    KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLASH,
+    KC_ESC, KC_A, KC_S, KC_D, KC_F, KC_G,                                               KC_H, KC_J, KC_K, KC_L, KC_SCLN, RSFT_T(KC_QUOTE),
+    LCTL_T(KC_MINUS), LGUI_T(KC_Z), LALT_T(KC_X), KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMMA, RALT_T(KC_DOT), RGUI_T(KC_SLSH), RCTL_T(KC_EQUAL),
+    KC_LBRC, KC_LGUI, KC_LALT, KC_LALT, LT(_NAVALT, KC_TAB), LSFT_T(KC_SPACE),          LCTL_T(KC_ENTER), LT(_SYM, KC_BSPC), KC_RALT, KC_RALT, KC_RGUI, KC_RBRC
   ),
 
   /* QWERTY ALT - tap
@@ -109,14 +111,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * |      | VolD |      | s alt| s ctl|      |    | alt` |alttab|saltab|salt` | acc2 | acc0 |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * |      |      |      |      |(this)|  Del |    | BkSp | _ADJ |      |      |      |      |
+  * |  (   |      |      |      |(this)|  Del |    | BkSp | _ADJ |      |      |      |  )   |
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_NAVALT] = LAYOUT_ortho_4x12(/*  */
     KC_TRNS, KC_APP, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                          KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_BRIGHTNESS_UP, KC_PSCREEN,
     KC_MUTE, KC_VOLU, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                         KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_BRIGHTNESS_DOWN, KC_INS,
     KC_TRNS, LGUI_T(KC_VOLD), KC_TRNS, S(KC_LALT), S(KC_LCTRL), KC_TRNS,          M_ALT_GRAVE, M_ALT_TAB, M_S_ALT_TAB, M_S_ALT_GRAVE, KC_ACL2, KC_ACL0,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LSFT_T(KC_DEL),                  LCTL_T(KC_BSPC), LT(_ADJUST, KC_DEL), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    LSFT(KC_9), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LSFT_T(KC_DEL),               LCTL_T(KC_BSPC), LT(_ADJUST, KC_DEL), KC_TRNS, KC_TRNS, KC_TRNS, LSFT(KC_0)
   ),
 
   /* SYM (right thumb) - tap
@@ -127,31 +129,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | trans| trans|      |  {   |  (   |   [  |    |  ]   |  )   |  }   |      |      |      |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | trans| trans| trans|      | Esc  |  Del |    | Bk`Sp |(this)| trans| trans| trans| trans|
+  * | trans| trans| trans|      | Esc  |  Del |    | BkSp |(this)| trans| trans| trans| trans|
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_SYM] = LAYOUT_ortho_4x12(
-    KC_F12, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                                  KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-    KC_TRNS, KC_1, KC_2, KC_3, KC_4, KC_5,                                      KC_6, KC_7, KC_8, KC_9, KC_0, RSFT_T(KC_BSLASH),
-    KC_TRNS, KC_TRNS, KC_TRNS, S(KC_LBRC), S(KC_9), KC_LBRC,                    KC_RBRC, S(KC_0), S(KC_RBRC), KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LT(_ADJUST, KC_ESC), LSFT_T(KC_DEL),    LCTL_T(KC_BSPC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    KC_F12, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                                    KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
+    KC_TRNS, KC_1, KC_2, KC_3, KC_4, KC_5,                                        KC_6, KC_7, KC_8, KC_9, KC_0, RSFT_T(KC_BSLASH),
+    KC_TRNS, KC_TRNS, KC_TRNS, S(KC_LBRC), S(KC_9), KC_LBRC,                      KC_RBRC, S(KC_0), S(KC_RBRC), KC_TRNS, KC_TRNS, KC_TRNS,
+    LSFT(KC_9), KC_TRNS, KC_TRNS, KC_TRNS, LT(_ADJUST, KC_ESC), LSFT_T(KC_DEL),   LCTL_T(KC_BSPC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LSFT(KC_0)
   ),
 
   /* ADJUST (both thumbs) - tap
   * ,-----------------------------------------.    ,-----------------------------------------.
-  * | NAV  | QWERT|QWERT2|DVORAK|COLEMA|OVERWA|    | trans| trans| trans| trans| trans| SYM  |
+  * | NAV  | build| trans| trans|reload| trans|    | trans| trans| trans| trans| trans| SYM  |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | caps | trans| trans| trans|c a E | trans|    | trans| trans| trans|ls ahl| trans| trans|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | trans| trans| trans|railsc| trans| trans|    | trans| trans| trans| trans| trans| trans|
+  * | trans| trans| trans|railsc| trans| fold |    |unfold| trans| trans| trans| trans| trans|
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | trans| trans| trans| trans| trans| trans|    | trans| trans| trans| trans| trans| trans|
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_ADJUST] = LAYOUT_ortho_4x12(
-    TO(_NAVALT), DF(_QWERTY), DF(_QWERTY_ALT), DF(_DVORAK), DF(_COLEMAK), DF(_OW),   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_SYM),
+    TO(_NAVALT), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_SYM),
     KC_CAPS, KC_TRNS, KC_TRNS, KC_TRNS, MEH(KC_E), KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, M_LSAHL, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, M_RAILSC, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, M_RAILSC, KC_TRNS, C(S(KC_LBRC)),                  C(S(KC_RBRC)), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )
 };
@@ -166,6 +168,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case M_RAILSC: 
       if (record->event.pressed) {
         SEND_STRING("rails c" SS_TAP(X_ENTER));
+      }
+      break;
+    case M_RELOAD:
+      if (record->event.pressed) {
+        SEND_STRING("reload!" SS_TAP(X_ENTER));
+      }
+      break;
+    case M_REBUILD:
+      if (record->event.pressed) {
+        SEND_STRING("sudo make keebio/levinson/rev2:hogdog:avrdude" SS_TAP(X_ENTER));
       }
       break;
     case M_ALT_TAB:
