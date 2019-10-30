@@ -17,6 +17,7 @@ enum custom_layers {
   MACRO,
   LEFT,
   PWD,
+  COOKING,
   LAYER
 };
 
@@ -166,6 +167,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_LALT, KC_BSPC, KC_ENTER
   ),
 
+  /* password
+  * |-----|-----|-----|-----|
+  * |  S  |  L  |  3  | alt |
+  * |-----|-----|-----|-----|
+  * |  b  |  w  |  s  | ctl |
+  * |-----|-----|-----|-----|
+  * |  a  |  s  |  d  | shft|
+  * |-----|-----|-----|-----|
+  * |layer| alt |bkspc|enter|
+  * |-----|-----|-----|-----|
+  */
+  [COOKING] = LAYOUT_ortho_4x4(
+    KC_S, KC_L, KC_3, KC_LALT,
+    KC_B, KC_W, KC_S, KC_LCTL,
+    KC_A, KC_S, KC_D, KC_LSFT,
+    KC_TRNS, KC_LALT, KC_BSPC, KC_ENTER
+  ),
+
   /* layer switch
   * |-----|-----|-----|-----|
   * | ow  | num | rgb |mouse|
@@ -180,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER] = LAYOUT_ortho_4x4(
     RESET_LAYERS, TG(NUMPAD), TG(RGB), TG(MOUSE),
     TG(NAV), TG(MACRO), TG(LEFT), TG(PWD),
-    KC_NO, KC_NO, KC_NO, KC_NO,
+    TG(COOKING), KC_NO, KC_NO, KC_NO,
     KC_TRNS, KC_SYSTEM_SLEEP, A(KC_TAB), RGB_TOG
   )
 };
