@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * |  -   |  Z   |  X   |  C   |  V   |  B   |    |  N   |  M   |  ,   |  .   |  /   |  =   |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | Ctrl | Gui  |  Alt |  Alt | Tab  | Space|    | Enter| BkSp |  Alt | Alt  | Gui  | Ctrl |
+  * | Ctrl | Gui  |  Alt |  GUI | Tab  | Space|    | Enter| BkSp |  Gui | Alt  | Gui  | Ctrl |
   * `-----------------------------------------'    `-----------------------------------------'
   */
   /* QWERTY - hold
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LSFT_T(KC_GRAVE),  KC_Q, KC_W, KC_E, KC_R, KC_T,                                    KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLASH,
     KC_ESC, KC_A, KC_S, KC_D, KC_F, KC_G,                                               KC_H, KC_J, KC_K, KC_L, KC_SCLN, RSFT_T(KC_QUOTE),
     LCTL_T(KC_MINUS), LGUI_T(KC_Z), LALT_T(KC_X), KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMMA, RALT_T(KC_DOT), RGUI_T(KC_SLSH), RCTL_T(KC_EQUAL),
-    KC_LBRC, KC_LGUI, KC_LALT, KC_LALT, LT(_NAVALT, KC_TAB), LSFT_T(KC_SPACE),          LCTL_T(KC_ENTER), LT(_SYM, KC_BSPC), KC_RALT, KC_RALT, KC_RGUI, KC_RBRC
+    KC_LCTL, KC_LGUI, KC_LALT, KC_LGUI, LT(_NAVALT, KC_TAB), LSFT_T(KC_SPACE),          LCTL_T(KC_ENTER), LT(_SYM, KC_BSPC), KC_LGUI, KC_RALT, KC_RGUI, KC_RCTL
   ),
 
   /* QWERTY ALT - tap
