@@ -54,14 +54,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+-------------,                             ,-------------+------+------+------,
  *        |  (   |   )  |                                                         |   [  |   ]  |
  *        '------+------'-------------'                             '-------------'------+------'
- *                      | Tab  |Space |                             | Enter| BkSp |
- *                      |  +   |   +  |                             |  +   |  +   |
- *                      | NAV  |Shift |                             | Ctl  | SYM  |
+ *                      |  Esc | Tab  |                             | BkSp |  ;  |
+ *                      |   +  |  +   |                             |  +   |  +  |
+ *                      |  GUI | NAV  |                             | SYM  | GUI |
  *                      '------+------'                             '------+------'
  *                                    '------+------' '------+------'
- *                                    |  Esc | LOCK | |  del |  ;  |
- *                                    |   +  |      | |   +  |  +  |
- *                                    |  GUI |      | |  meh | GUI |
+ *                                    |Space | LOCK | |  del | Enter|
+ *                                    |   +  |      | |   +  |  +   |
+ *                                    |Shift |      | |  meh | Ctl  |
  *                                    '------+------' '------+------'
  *                                    |      |  Ins | |      |     |
  *                                    |      |   +  | |      |     |
@@ -73,8 +73,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_A, KC_S, KC_D,    KC_F,    KC_G,                                       KC_H, KC_J,    KC_K,    KC_L,   KC_QUOTE, \
   KC_Z, KC_X, KC_C,    KC_V,    KC_B,                                       KC_N, KC_M,    KC_COMM, KC_DOT, KC_SLSH,  \
            KC_LPRN, KC_RPRN,                                                   KC_LBRC, KC_RBRC,                      \
-                        NAV_TAB, SFT_SPC,                           CTL_RTN, SYM_BKSP,                                \
-                             LGUI_T(KC_ESC), KC_LALT,          KC_RALT,  RGUI_T(KC_SCLN),                             \
+                        LGUI_T(KC_ESC), NAV_TAB,                           SYM_BKSP, RGUI_T(KC_SCLN),                                \
+                             SFT_SPC, KC_LALT,          KC_RALT, CTL_RTN,                              \
                              KC_LOCK, LCTL_T(KC_INS),         TG(_GAME), MEH_T(KC_DEL)                               \
 ),
 
