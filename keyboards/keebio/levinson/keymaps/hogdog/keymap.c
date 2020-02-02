@@ -27,6 +27,7 @@ enum custom_keycodes {
 #define _NAV 6
 #define _SYM 7
 #define _MOUSE 8
+#define _GAME 9
 #define _ADJUST 15
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -112,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * +------+------+------+------+------|      |    |      |------+------+------+------+------+
   * |  :   |  M l |  _   |   -  |   _  |      |    |      | Left | Down |  Up  | Right|   ;  |
   * +------+------+------+------+------|      |    |      |------+------+------+------+------+
-  * |  ~   |MOUSE |   >  |   =  |  +   |      |    |      |  -   |  :   |  _   |  \   |   :  |
+  * |  ~   |      |   >  |   =  |  +   |      |    |      |  -   |  :   |  _   |  \   |   :  |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | LEAD | ScLt | ScRt |      |(this)|      |    | BkSp | _ADJ |      |      |      |      |
   * `-----------------------------------------'    `-----------------------------------------'
@@ -120,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NAV] = LAYOUT_ortho_4x12(
     KC_GRAVE, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U, _______,               _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_PIPE, 
     KC_COLON, KC_MS_L, KC_UNDS, KC_MINUS, KC_UNDS, _______,              _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_SCLN, 
-    KC_TILDE, TO(_MOUSE), KC_PLUS, KC_EQL, KC_GT, _______,                  _______, KC_MINUS, KC_COLON, KC_UNDS, KC_BSLS, KC_COLON,
+    KC_TILDE, _______, KC_PLUS, KC_EQL, KC_GT, _______,                  _______, KC_MINUS, KC_COLON, KC_UNDS, KC_BSLS, KC_COLON,
     KC_LEAD, KC_WH_L, KC_WH_R, _______, _______, _______,               _______, LT(_ADJUST, KC_BSPC), _______, KC_WH_D, KC_WH_U, _______
   ),
 
@@ -171,11 +172,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_MOUSE] = LAYOUT_ortho_4x12(
-    KC_GRAVE, KC_BTN2, KC_MS_U, KC_BTN1, M_MS_DOWN, _______,               _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_BSLS, 
-    KC_COLON, KC_MS_L, KC_MS_D, KC_MS_R, M_MS_UP, _______,              _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_SCLN, 
-    KC_TILDE, KC_X, KC_C, KC_V, KC_GT, _______,                  _______, KC_ACL0, KC_ACL1, KC_ACL2, KC_QUES, KC_PIPE, 
+    KC_GRAVE, KC_BTN2, KC_MS_U, KC_BTN1, M_MS_DOWN, TG(_MOUSE),               TG(_MOUSE), KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_BSLS, 
+    KC_COLON, KC_MS_L, KC_MS_D, KC_MS_R, M_MS_UP, TG(_MOUSE),              TG(_MOUSE), KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_SCLN, 
+    KC_TILDE, KC_X, KC_C, KC_V, KC_GT, TG(_MOUSE),                  TG(_MOUSE), KC_ACL0, KC_ACL1, KC_ACL2, KC_QUES, KC_PIPE, 
     _______, KC_WH_L, KC_WH_R, _______, TG(_MOUSE), _______,               _______, _______, _______, KC_WH_D, KC_WH_U, _______
-  )
+  ),
+  /* GAME
+  * ,-----------------------------------------.    ,-----------------------------------------.
+  * | tab  |  Q   |  W   |  E   |  R   |      |    |      |  Y   |  U   |  I   |  O   |  P   |
+  * +------|------+------+------+------+      |    |      |------+------+------+------+------+
+  * | sft  |  A   |  S   |  D   |  F   |      |    |      |  H   |  J   |  K   |  L   |   '  |
+  * +------|------+------+------+------+      |    |      |------+------+------+------+------+
+  * | ctl  |  Z   |  X   |  C   |  V   |      |    |      |  N   |  M   |  ,   |  .   |  /   |
+  * |------+------+------+------+------+------|    |------+------+------+------+------+------|
+  * | esc  |   [  |   ]  |  h   |   `  | Space|    | Enter| BkSp |  del |   [  |   ]  | alt  |
+  * `-----------------------------------------'    `-----------------------------------------'
+  */
+  [_GAME] = LAYOUT_ortho_4x12(
+    KC_TAB, KC_Q, KC_W, KC_E, KC_R, TO(_MOUSE),                TG(_GAME), KC_Y, KC_U, KC_I, KC_O, KC_P, 
+    KC_LSFT, KC_A, KC_S, KC_D, KC_F, TO(_MOUSE),                TG(_GAME), KC_H, KC_J, KC_K, KC_L, KC_QUOTE, 
+    KC_LCTL, KC_Z, KC_X, KC_C, KC_V, TO(_MOUSE),                TG(_GAME), KC_N, KC_M, KC_COMMA, KC_DOT, KC_SLSH, 
+    KC_ESC, KC_LBRC, KC_RBRC, KC_H, KC_GRAVE, KC_SPACE,          LCTL_T(KC_ENTER), LT(_SYM, KC_BSPC), RGUI_T(KC_DEL), KC_LBRC, KC_RBRC, TG(_GAME)
+  ),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -276,6 +294,10 @@ void matrix_scan_user(void) {     // The very important timer.
     SEQ_TWO_KEYS(KC_M, KC_S) {
       layer_off(_NAV);
       layer_on(_MOUSE);
+    }
+
+    SEQ_TWO_KEYS(KC_G, KC_M) {
+      layer_on(_GAME);
     }
   }
 }
