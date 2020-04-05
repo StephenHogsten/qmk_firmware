@@ -2,6 +2,9 @@
 bool is_alt_tab_active = false;
 uint16_t alt_tab_timer = 0;
 
+bool is_sym_locked = false;
+bool is_nav_locked = false;
+
 extern keymap_config_t keymap_config;
 
 enum custom_keycodes {
@@ -167,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * +------+------+------+------+------|      |    |      |------+------+------+------+------+
   * |  !   |  @   |  #   |  $   |  %   |      |    |      |  ^   |  &   |  *   |  ins |  )   |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | trans|   ;  |   :  |      | Esc  |  Del |    | BkSp |(this)| trans| trans| trans| trans|
+  * | lead |   ;  |   :  |      | Esc  |  Del |    | BkSp |(this)| trans| trans| trans| trans|
   * `-----------------------------------------'    `-----------------------------------------'
   */
   [_SYM] = LAYOUT_ortho_4x12(
@@ -177,10 +180,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_SCLN, KC_COLON, _______, LT(_ADJUST, KC_TAB), _______,   _______, _______, _______, _______, _______, _______
   ),
   [_SYMALT] = LAYOUT_ortho_4x12(
-    KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, _______,                   _______, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, 
-    LALT_T(KC_1), LGUI_T(KC_2), LSFT_T(KC_3), LCTL_T(KC_4), KC_5, _______,                        _______, KC_6, RCTL_T(KC_7), RSFT_T(KC_8), RGUI_T(KC_9), RALT_T(KC_0), 
-    KC_EXLM, KC_AT,  KC_HASH, KC_DLR, KC_PERC, _______,           _______, KC_CIRC, KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN,
-    _______, KC_SCLN, KC_COLON, _______, LT(_ADJUST, KC_TAB), LT(_ADJUST, KC_SPACE),   _______, _______, _______, _______, _______, _______
+    KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, _______,                                        _______, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, 
+    LALT_T(KC_1), LGUI_T(KC_2), LSFT_T(KC_3), LCTL_T(KC_4), KC_5, _______,             _______, KC_6, RCTL_T(KC_7), RSFT_T(KC_8), RGUI_T(KC_9), RALT_T(KC_0), 
+    KC_EXLM, KC_AT,  KC_HASH, KC_DLR, KC_PERC, _______,                                _______, KC_CIRC, KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN,
+    KC_LEAD, KC_SCLN, KC_COLON, _______, LT(_ADJUST, KC_TAB), LT(_ADJUST, KC_SPACE),   _______, _______, _______, _______, _______, _______
   ),
 
   /* ADJUST (both thumbs) - tap
@@ -326,6 +329,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 LEADER_EXTERNS();
 
+void toggle_sym_lock(void) {
+  if (is_sym_locked) {
+    layer_on(_SYMALT);
+  } else {
+    layer_off(_SYMALT);
+  }
+  is_sym_locked = !is_sym_locked;
+}
+
+void toggle_nav_lock(void) {
+  if (is_nav_locked) {
+    layer_on(_NAVALT);
+  } else {
+    layer_off(_NAVALT);
+  }
+  is_nav_locked = !is_nav_locked;
+}
+
 void matrix_scan_user(void) {     // The very important timer. 
   LEADER_DICTIONARY() {
     leading = false;
@@ -349,6 +370,22 @@ void matrix_scan_user(void) {     // The very important timer.
 
     SEQ_ONE_KEY(KC_F) {
       SEND_STRING("5");
+    }
+
+    SEQ_ONE_KEY(KC_TAB) {
+      toggle_nav_lock();
+    }
+
+    SEQ_ONE_KEY(KC_SPACE) {
+      toggle_nav_lock();
+    }
+
+    SEQ_ONE_KEY(KC_BSPC) {
+      toggle_sym_lock();
+    }
+
+    SEQ_ONE_KEY(KC_ENTER) {
+      toggle_sym_lock();
     }
 
     SEQ_ONE_KEY(KC_V) {
@@ -412,3 +449,4 @@ void matrix_scan_user(void) {     // The very important timer.
 //       return TAPPING_TERM;
 //   }
 // }
+
