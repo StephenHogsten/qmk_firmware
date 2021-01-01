@@ -13,6 +13,13 @@ enum custom_keycodes {
   M_RESET
 };
 
+enum combos {
+  // WF_ESC,
+  // FP_SFT,
+  UY_QUOTE,
+  // LU_SFT
+};
+
 #define _COLEMAK_DH 0
 #define _MOUSE 1
 #define _GAME 2
@@ -34,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * +------+------+------+------+------|      |    |      |------+------+------+------+------+
   * |  `   |  =   |  ;   |   -  | ScDn |      |    |      | Left | Down |  Up  | Right|  ESC |
   * +------+------+------+------+------|      |    |      |------+------+------+------+------+
-  * | caps |   }  |   ]  |   )  | click|      |    |      |   >  |   (  |   [  |  {   |   \  |
+  * |  !   |   }  |   ]  |   )  | click|      |    |      |   >  |   (  |   [  |  {   |   \  |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * | LEAD | ScLt | ScRt |      |(this)|      |    | spc  | _ADJ |      | ScDn | ScUp |      |
   * `-----------------------------------------'    `-----------------------------------------'
@@ -42,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NAV] = LAYOUT_ortho_4x12(
     KC_TILDE, KC_PLUS, KC_COLON, KC_UNDS, KC_WH_U, _______,                                 _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_PIPE, 
     LALT_T(KC_GRAVE), LGUI_T(KC_EQL), LSFT_T(KC_SCLN), LCTL_T(KC_MINUS), KC_WH_D, _______,  _______, KC_LEFT, RCTL_T(KC_DOWN), RSFT_T(KC_UP), RGUI_T(KC_RIGHT), RALT_T(KC_ESC), 
-    KC_CAPS, KC_RCBR, KC_RBRC, KC_RPRN, KC_MS_BTN1, _______,                                     _______, KC_GT, KC_LPRN, KC_LBRC, KC_LCBR, KC_BSLS,
+    KC_EXLM, KC_RCBR, KC_RBRC, KC_RPRN, KC_MS_BTN1, _______,                                     _______, KC_GT, KC_LPRN, KC_LBRC, KC_LCBR, KC_BSLS,
     KC_LEAD, KC_WH_L, KC_WH_R, _______, _______, _______,                                   LT(_ADJUST, KC_SPACE), LT(_ADJUST, KC_BSPC), _______, KC_WH_D, KC_WH_U, _______
   ),
   [_SYM] = LAYOUT_ortho_4x12(
@@ -54,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* ADJUST (both thumbs) - tap
   * ,-----------------------------------------.    ,-----------------------------------------.
-  * | qwer | qwe2 |      |      |reload|      |    |      |      |      |      |      | SYM  |
+  * | qwer | qwe2 |      |      |reload|      |    |   X  |      |      |      |      | SYM  |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
-  * | caps | prsc |coledh| caps |      |      |    |      |      | caps |ls ahl|      |      |
+  * | caps | prsc |coledh| caps |      |      |    |   X  |      | caps |ls ahl|      |      |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
   * |      |      | cole |railsc|      | fold |    |unfold|      |      |      |      |      |
   * |------+------+------+------+------+------|    |------+------+------+------+------+------|
@@ -246,6 +253,19 @@ void matrix_scan_user(void) {     // The very important timer.
     }
   }
 }
+
+// const uint16_t PROGMEM wf_combo[] = {KC_W, KC_F, COMBO_END};
+// const uint16_t PROGMEM fp_combo[] = {KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM uy_combo[] = {KC_U, KC_Y, COMBO_END};
+// const uint16_t PROGMEM lu_combo[] = {KC_L, KC_U, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  // [WF_ESC] = COMBO(wf_combo, KC_ESC),
+  // [FP_SFT] = COMBO(fp_combo, KC_LSFT),
+  [UY_QUOTE] = COMBO(uy_combo, KC_DQUO)
+  // [LU_SFT] = COMBO(lu_combo, KC_RSFT)
+};
+// these don't seem to work if you also need modifiers?
 
 // uint32_t layer_state_set_user(uint32_t state) {
 //   switch (biton32(state)) {

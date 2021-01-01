@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include <stdio.h>
 
 enum custom_keycodes {
   RESET_LAYERS = SAFE_RANGE,
@@ -206,8 +207,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 void keyboard_post_init_user(void) {
   rgblight_enable_noeeprom();
-  rgblight_sethsv_noeeprom(HSV_YELLOW);
-  rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING + 3);
+  // rgblight_sethsv_noeeprom(HSV_YELLOW);
+  // rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING + 3);
+  rgblight_setrgb_range(238, 0, 100, 0, 4);
+  sleep(0.5);
+  rgblight_setrgb_range(0, 0, 0, 0, 4);
+  sleep(0.5);
+  rgblight_setrgb_range(238, 0, 100, 0, 4);
+  sleep(1.5);
+  rgblight_setrgb_range(0, 0, 0, 0, 4);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {

@@ -13,6 +13,10 @@ extern keymap_config_t keymap_config;
 
 // Fillers to make layering more clear
 
+enum combos {
+  UY_QUOTE,
+};
+
 #define ____ KC_TRNS
 
 // #define SFT_ESC  SFT_T(KC_ESC)
@@ -332,6 +336,12 @@ void matrix_scan_user(void) {
   }
 }
 
+const uint16_t PROGMEM uy_combo[] = {KC_U, KC_Y, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [UY_QUOTE] = COMBO(uy_combo, KC_DQUO)
+};
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case M_MS_DOWN:
@@ -347,3 +357,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
+

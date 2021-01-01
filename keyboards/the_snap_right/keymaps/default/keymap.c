@@ -13,6 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include QMK_KEYBOARD_H
 
 // Defines the keycodes used by our macros in process_record_user
@@ -23,10 +24,10 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT(  \
-  KC_A, KC_B, KC_C, KC_D, KC_E,     KC_T, KC_U, KC_V, KC_W, KC_X, \
-  KC_F, KC_G, KC_H, KC_I, KC_J,     KC_Y, KC_Z, KC_1, KC_2, KC_3, \
-  KC_K, KC_L, KC_M, KC_N, KC_O,     KC_4, KC_5, KC_6, KC_7, KC_8, \
-        KC_P, KC_Q, KC_R, KC_S,     KC_9, KC_0, KC_LPRN, KC_RPRN        \
+  KC_A, KC_B, KC_C, KC_D, KC_E, \
+  KC_F, KC_G, KC_H, KC_I, KC_J, \
+  KC_K, KC_L, KC_M, KC_N, KC_O, \
+  KC_P, KC_Q, KC_R, KC_S        \
 )
 };
 
@@ -46,11 +47,11 @@ void led_set_user(uint8_t usb_led) {
 
 }
 
-void encoder_update_user(uint8_t index, bool clockwise) {
-  if (clockwise) {
-    SEND_STRING("clock");
-  } else {
-    SEND_STRING("unclock");
-  }
-  return;
-}
+// void encoder_update_user(uint8_t index, bool clockwise) {
+//   if (clockwise) {
+//     SEND_STRING("clock");
+//   } else {
+//     SEND_STRING("unclock");
+//   }
+//   return;
+// }

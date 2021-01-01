@@ -3,3 +3,5 @@ NKRO_ENABLE = yes
 # TAP_DANCE_ENABLE = yes
 # KEY_LOCK_ENABLE = yes
 LEADER_ENABLE = yes
+
+COMBO_ENABLE = yes

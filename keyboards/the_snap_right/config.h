@@ -24,10 +24,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT_ID      0x0000
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    HogDog
-#define PRODUCT         the_snap
+#define PRODUCT         the_snap_right
 #define DESCRIPTION     A custom keyboard
 
 /* key matrix size */
+// double rows for split? lev and dactyl both do
+// I think b/c the other side is treated like more rows?
 #define MATRIX_ROWS 8
 #define MATRIX_COLS 5
 
@@ -46,8 +48,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROW_PINS { B5, B6, B7, D6 }
 #define MATRIX_COL_PINS { F7, F6, F5, F4, F1 }
 // right
-// #define MATRIX_ROW_PINS_RIGHT { F7, F6, F5, F4 }
-// #define MATRIX_COL_PINS_RIGHT { D4, C6, D7, E6, B4 }
+// #define MATRIX_COL_PINS { D4, C6, D7, E6, B4 }
+// #define MATRIX_ROW_PINS { F7, F6, F5, F4 }
 
 /*
  * #define MATRIX_ROW_PINS { B6, B7 }
@@ -71,12 +73,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /*
  * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
  */
-#define SOFT_SERIAL_PIN D2
-#define EE_HANDS
-// use :avrdude-split-left
-// b/c the F_CPU values are different I think it might not work
+#define SOFT_SERIAL_PIN D0 // or D1, D2, D3, E6
+#define EE_HANDS // compile w/ :avrdude-split-right to store that it's rhs to eeprom
 
-#define SPLIT_USB_DETECT
 
 // #define BACKLIGHT_PIN B7
 // #define BACKLIGHT_BREATHING
