@@ -48,9 +48,9 @@ void led_set_user(uint8_t usb_led) {
 
 void encoder_update_user(uint8_t index, bool clockwise) {
   if (clockwise) {
-    send_string_P("clock");
+    SEND_STRING("clock");
   } else {
-    send_string_P("unclock");
+    SEND_STRING("unclock");
   }
   return;
 }

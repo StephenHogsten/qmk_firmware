@@ -16,7 +16,6 @@
 #pragma once
 
 #include "quantum.h"
-#include "split_util.h"
 
 /* This a shortcut to help you visually see your layout.
  *
